@@ -7,6 +7,8 @@ interface Props {
     method: "post" | "patch"
     event?: {
         title?: string
+        image?: string
+        date?: string
         description?: string
     }
 }
@@ -37,10 +39,10 @@ export default function EventForm({method, event}: Props) {
               defaultValue={event ? event.title : ""}
             />
             <Input method="input" id="image" label="Image" type="url" 
-              defaultValue={event ? event.title : ""}
+              defaultValue={event ? event.image : ""}
             />
             <Input method="input" id="date" label="Date" type="date" 
-              defaultValue={event ? event.title : ""}
+              defaultValue={event ? event.date : ""}
             />
             <Input method="textarea" id="description" label="Description" 
               defaultValue={event ? event.description : ""}

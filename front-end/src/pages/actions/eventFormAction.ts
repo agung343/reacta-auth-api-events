@@ -15,15 +15,16 @@ export default async function eventFormAction({request, params}: ActionFunctionA
 
     let URL: string = import.meta.env.VITE_URL
 
-    if (method === "PATHC") {
+    if (method === "PATCH") {
         const eventId = params.eventId as string
         URL = `${URL}/events/` + eventId
-        return URL
+    } else {
+        URL = `${URL}/events`
     }
 
     const token = getAuthToken()
 
-    const response = await fetch(`${URL}/events`, {
+    const response = await fetch(URL, {
         method: method,
         headers: {
             "Content-Type": "application/json",
@@ -32,7 +33,8 @@ export default async function eventFormAction({request, params}: ActionFunctionA
         body: JSON.stringify(eventData)
     })
 
-    if (response.status === 422) {
+    if (response.status === 422 || response.status === 401) {
+        console.log(response)
         return response
     }
 
