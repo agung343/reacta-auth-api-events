@@ -1,7 +1,9 @@
 import { json, defer, LoaderFunctionArgs } from "react-router-dom";
 
+const url = import.meta.env.VITE_URL
+
 async function loadEvent(id: string) {
-    const response = await fetch("http://localhost:8080/events/" + id)
+    const response = await fetch(`${url}/events/` + id)
 
     if (!response.ok) {
         throw json(
@@ -15,7 +17,7 @@ async function loadEvent(id: string) {
 }
 
 async function loadEvents() {
-    const response = await fetch("http://localhost:8080/events")
+    const response = await fetch(`${url}/events`)
 
     if (!response.ok) {
         throw json(

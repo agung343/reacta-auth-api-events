@@ -16,9 +16,10 @@ export async function authAction({request}: ActionFunctionArgs) {
         email: data.get("email"),
         password: data.get("password")
     }
-    console.log(authData)
 
-    const response = await fetch("http://localhost:8080/" + mode, {
+    const url = import.meta.env.VITE_URL
+
+    const response = await fetch(`${url}/` + mode, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
