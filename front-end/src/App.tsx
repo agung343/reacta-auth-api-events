@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import { tokenLoader } from "./util/auth-token";
@@ -6,8 +7,8 @@ import RootLayout from "./pages/RootLayout"
 import ErrorPage from "./pages/Error"
 import Homepage from "./pages/Home";
 import EventRootLayout from "./pages/EventsRoot";
-import EventsPage from "./pages/Events";
-import EventDetailPage from "./pages/EventDetail";
+const EventsPage = lazy(() => import("./pages/Events"))
+const EventDetailPage = lazy(() => import("./pages/EventDetail"))
 import NewEventPage from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import NewsletterPage from "./pages/Newsletter";
@@ -19,16 +20,15 @@ import eventFormAction from "./pages/actions/eventFormAction";
 import newsletterAction from "./pages/actions/newsletterAction";
 import logoutAction from "./pages/actions/Logout";
 
-import { eventsLoader } from "./pages/loaders/eventsLoader";
-import { eventDetailLoader } from "./pages/loaders/eventLoader";
 
 const router = createBrowserRouter([
   {path: "/", element: <RootLayout />, errorElement: <ErrorPage />, id:"root",loader: tokenLoader, children:
     [
       {index: true, element: <Homepage />},
       {path: "events", element: <EventRootLayout />, children: [
-        {index: true, element: <EventsPage />, loader: eventsLoader},
-        {path:":eventId", id:"event-detail", loader: eventDetailLoader, children: [
+        {index: true, element: <EventsPage />, loader: () => import("./pages/loaders/eventsLoader").then(module => module.eventsLoader())},
+        {path:":eventId", id:"event-detail", 
+         loader: (meta) => import("./pages/loaders/eventLoader").then(module => module.eventDetailLoader(meta)), children: [
           {index:true, element: <EventDetailPage />, action: deleteEventDetail},
           {path: "edit", element: <EditEventPage />, action: eventFormAction }
         ]},

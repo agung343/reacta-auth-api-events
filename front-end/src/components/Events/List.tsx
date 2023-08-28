@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import classes from "./List.module.scss"
 
 export type EventsProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    event: any;
     id: string | number;
     image: string;
     title: string;
