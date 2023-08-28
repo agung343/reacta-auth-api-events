@@ -1,0 +1,35 @@
+.form {
+    max-width: 40rem;
+    margin: 2rem auto;
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+
+        .button {
+            font: inherit;
+            cursor: pointer;
+            color: var(--color-gray-800);
+            padding: .5rem 1.5rem;
+            background-color: var(--color-gray-300);
+            border: none;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: var(--color-primary-300);
+            }
+        }
+
+        a {
+            background-color: transparent;
+            color: var(--color-gray-300);
+            text-decoration: none;
+
+            &:hover {
+                background-color: var(--color-gray-800);
+            }
+        }
+    }
+}

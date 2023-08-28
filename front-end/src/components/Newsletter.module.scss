@@ -1,0 +1,19 @@
+.newsletter {
+    input, button {
+        font: inherit;
+        border: none;
+        border-radius: 0;
+        padding: .25rem .75rem;
+    }
+}
+
+button {
+    cursor: pointer;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    &:hover {
+        background-color: var(--color-primary-300);
+        color: var(--color-gray-800)
+    }
+}

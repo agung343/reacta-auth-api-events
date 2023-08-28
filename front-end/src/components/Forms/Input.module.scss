@@ -1,0 +1,11 @@
+label,
+input,
+textarea {
+    display: block;
+    width: 100%;
+
+    &:not(label) {
+        font: inherit;
+        padding: 0.25rem;
+    }
+}
